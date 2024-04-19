@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_constraint"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="138dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="36dp"
+        android:text="Tic Tac Toe"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/start_pvc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/start_pve"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginEnd="33dp"
+        android:text="Start PVE"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/start_pvc"
+        app:layout_constraintEnd_toStartOf="@+id/start_pvc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/start_pvc" />
+
+    <Button
+        android:id="@+id/start_pvc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="15dp"
+        android:text="Start PVC"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/start_pvp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/start_pve"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/start_pvp"
+        android:layout_width="142dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="35dp"
+        android:text="Start PVP"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/join_pvp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_pvc" />
+
+    <Button
+        android:id="@+id/join_pvp"
+        android:layout_width="142dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="17dp"
+        android:text="Join PVP"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/room_code_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_pvp" />
+
+    <EditText
+        android:id="@+id/room_code_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="104dp"
+        android:ems="10"
+        android:hint="Enter room code..."
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/name_input"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/join_pvp" />
+
+    <EditText
+        android:id="@+id/name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="29dp"
+        android:ems="10"
+        android:hint="Enter name..."
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/room_code_input" />
+</androidx.constraintlayout.widget.ConstraintLayout>
