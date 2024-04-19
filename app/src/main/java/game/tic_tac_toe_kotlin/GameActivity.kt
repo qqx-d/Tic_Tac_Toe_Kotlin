@@ -83,13 +83,12 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
     fun startGame() {
         gameModel?.apply {
             val updatedPlayerTurn = "X"
-            // Используйте поля для имён игроков, чтобы сохранить их значения
             updateGameData(
                 GameModel(
                     gameID = gameID,
                     gameWithAI = gameWithAI,
-                    playerXName = playerXName, // Сохраняем имя игрока X
-                    playerOName = playerOName, // Сохраняем имя игрока O
+                    playerXName = playerXName,
+                    playerOName = playerOName,
                     currentPlayer = if(gameWithAI) updatedPlayerTurn else currentPlayer,
                     gameState = GameState.IN_PROGRESS
                 )
@@ -141,7 +140,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
                         if(gameID == "-1")
                             if(!winnerID.isEmpty()) "$winnerID won!" else "Draw!"
                         else
-                            "$winnerName won!" // Отображаем имя победителя
+                            "$winnerName won!"
                     }
                 }
         }
