@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             GameModel(
                 gameID = Random.nextInt( 0 .. 9999).toString(),
                 gameState = GameState.CREATED,
-                playerXName = playerName // Назначаем имя игрока X
+                playerXName = playerName
             )
         )
 
@@ -107,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
                 if(model != null) {
                     model.gameState = GameState.JOINED
-                    model.playerOName = playerName // Назначаем имя игрока O
+                    model.playerOName = playerName
 
                     GameData.saveGameModel(model)
 
