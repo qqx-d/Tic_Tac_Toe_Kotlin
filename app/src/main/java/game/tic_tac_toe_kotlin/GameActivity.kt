@@ -12,6 +12,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
 
     private var gameModel : GameModel? = null
 
+    // Array to store winning positions
     private val winningPositions = arrayOf(
         intArrayOf(0, 1, 2),
         intArrayOf(3, 4, 5),
@@ -29,23 +30,27 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
 
         setContentView(binding.root)
 
+        // Fetch the game model from Firebase
         GameData.fetchGameModel()
 
         bindCellButtons()
 
+        // Observe changes in the game model
         GameData.gameModel.observe(this) {
             gameModel = it
             UploadUI()
         }
 
+        // Set onClick listener for the start game button
         binding.startGame.setOnClickListener {
             startGame()
-
         }
 
+        // Start with the start button visible
         turnStartButton(true)
     }
 
+    // Function to make the AI's move
     fun makeBotMove() {
         gameModel?.apply {
             if(gameWithAI == false) return
@@ -62,6 +67,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Function to check for a winner or a draw
     fun checkWinner() {
         gameModel?.apply {
             for (i in winningPositions) {
@@ -80,6 +86,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Function to start the game
     fun startGame() {
         gameModel?.apply {
             val updatedPlayerTurn = "X"
@@ -96,15 +103,18 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Function to update the game model in Firebase
     fun updateGameData(model : GameModel) {
         GameData.saveGameModel(model)
     }
 
+    // Function to update the UI based on the game model
     fun UploadUI() {
         setCellValuesUI()
         setGameStatusUI()
     }
 
+    // Function to set the game status UI text
     fun setGameStatusUI() {
         gameModel?.apply {
             binding.gameStatus.text =
@@ -146,11 +156,12 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-
+    // Function to show or hide the start game button
     fun turnStartButton(state : Boolean) {
         binding.startGame.visibility = if(state) View.VISIBLE else View.INVISIBLE
     }
 
+    // Function to set the cell values in the UI
     fun setCellValuesUI() {
         gameModel?.apply {
             binding.cell1.text = gameField[0]
@@ -165,6 +176,7 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
+    // Function to bind onClick listeners to cell buttons
     fun bindCellButtons() {
         binding.cell1.setOnClickListener(this)
         binding.cell2.setOnClickListener(this)
@@ -177,20 +189,23 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
         binding.cell9.setOnClickListener(this)
     }
 
+    // Function to handle clicks on cell buttons
     override fun onClick(v: View?) {
         gameModel?.apply {
+            // Inform the player that the game has not started
             if(gameState != GameState.IN_PROGRESS){
                 Toast.makeText(applicationContext, "Game not started!", Toast.LENGTH_SHORT).show()
                 return
             }
-
+            
+            // Prevent and inform the player that it's not his code now
             if(!gameID.equals("-1") && currentPlayer != GameData.PlayerID && gameWithAI == false) {
                 Toast.makeText(applicationContext, "Not your turn!", Toast.LENGTH_SHORT).show()
                 return
             }
 
+            // Change of the current player and the bot's move, in case the game is in PVC mode
             var clickedCellID = (v?.tag as String).toInt()
-
             if(gameField[clickedCellID].isEmpty()) {
                 gameField[clickedCellID] = currentPlayer
 
@@ -198,12 +213,12 @@ class GameActivity : AppCompatActivity(), View.OnClickListener {
 
                 checkWinner()
                 updateGameData(this)
-
+                
+                // The bot is making a move
                 if (gameState == GameState.IN_PROGRESS && currentPlayer != GameData.PlayerID) {
                     makeBotMove()
                 }
             }
         }
     }
-
 }
